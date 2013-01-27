@@ -13,12 +13,12 @@
 (defn word-contains [letters word]
   (every? #(.contains word (str %1)) letters))
 
-(def word-seq
+(def words
   (line-seq
     (BufferedReader. (StringReader. (slurp "/usr/share/dict/words")))))
 
 (defn find-word-containing [letters]
-  (with-open [rdr (clojure.java.io/reader "/usr/share/dict/words")]
-    (let [words (line-seq rdr)
-          containing-letters (partial word-contains letters)]
-      (first (filter containing-letters words)))))
+  (let [containing-letters (partial word-contains letters)]
+    (first (filter containing-letters words))))
+
+

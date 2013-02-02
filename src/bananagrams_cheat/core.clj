@@ -34,10 +34,14 @@
   (let [containing-letters (partial word-contains letters)]
     (first (filter containing-letters words))))
 
+(def by-descending-length #(>= (count %1) (count %2)))
+
 (defn words-makeable-with-letters [letters]
   (let [can-be-made-with-letters (partial word-can-be-made-with letters)]
-    (filter #(can-be-made-with-letters %1) words)))
+      (sort by-descending-length (filter #(can-be-made-with-letters %1) words))))
 
 (defn first-word-makeable-with-letters [letters length]
   (first (filter #(= (count %1) length) (words-makeable-with-letters letters))))
+
+
 

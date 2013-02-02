@@ -5,8 +5,6 @@
 (defn lower-case-letter [char]
   (some #(= %1 (int char)) (range (int \a) (int \z))))
 
-(fact (+ 2 2) => 4)
-
 (fact "Single random letter"
   (single-random-letter) => lower-case-letter)
 
@@ -22,3 +20,5 @@
 (fact "Find word containing"
   (find-word-containing [\a \y \d]) => "abandonedly")
 
+(fact "Letter counts"
+  (letter-counts "aluminium") => { \a 1, \i 2, \l 1, \m 2, \n 1 \u 2 })

@@ -1,6 +1,10 @@
 (ns bananagrams-cheat.core
   (:import (java.io BufferedReader StringReader)))
 
+(def words
+  (line-seq
+    (BufferedReader. (StringReader. (slurp "/usr/share/dict/words")))))
+
 (defn rand-25 []
   (rand-int 25))
 
@@ -26,19 +30,14 @@
         letter-count #(get %1 1)]
     (every? #(>= (candidate-letter-counts (letter %1) 0) (letter-count %1)) word-letter-counts)))
 
-(def words
-  (line-seq
-    (BufferedReader. (StringReader. (slurp "/usr/share/dict/words")))))
-
 (defn find-word-containing [letters]
   (let [containing-letters (partial word-contains letters)]
     (first (filter containing-letters words))))
 
+(defn words-makeable-with-letters [letters]
+  (let [can-be-made-with-letters (partial word-can-be-made-with letters)]
+    (filter #(can-be-made-with-letters %1) words)))
 
 (defn first-word-makeable-with-letters [letters length]
-  (let [can-be-made-with-letters (partial word-can-be-made-with letters)]
-     (first
-        (filter
-           #(and (can-be-made-with-letters %1)  (= (count %1) length))
-           words))))
+  (first (filter #(= (count %1) length) (words-makeable-with-letters letters))))
 

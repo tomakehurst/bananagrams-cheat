@@ -22,9 +22,9 @@
 (defn word-can-be-made-with [letters word]
   (let [word-letter-counts (letter-counts word)
         candidate-letter-counts (letter-counts letters)
-        key #(get %1 0)
-        value #(get %1 1)]
-    (every? #(>= (candidate-letter-counts (key %1)) (value %1)) word-letter-counts)))
+        letter #(get %1 0)
+        letter-count #(get %1 1)]
+    (every? #(>= (candidate-letter-counts (letter %1) 0) (letter-count %1)) word-letter-counts)))
 
 (def words
   (line-seq
@@ -35,3 +35,9 @@
     (first (filter containing-letters words))))
 
 
+(defn first-word-makeable-with-letters [letters length]
+  (let [can-be-made-with-letters (partial word-can-be-made-with letters)]
+     (first
+        (filter
+           #(and (can-be-made-with-letters %1)  (= (count %1) length))
+           words))))

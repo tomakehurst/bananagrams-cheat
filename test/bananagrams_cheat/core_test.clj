@@ -26,3 +26,6 @@
 (fact "Word can be made with"
   (word-can-be-made-with [\a \e \p \p \p \a \l] "apple") => true
   (word-can-be-made-with [\a \e \p \b \p \a \l] "banana") => false)
+
+(fact "First word of specific length makeable from letters"
+  (bananagrams-cheat.core/first-word-makeable-with-letters [\t \b \i \e \f \f \c \y \u \e] 6) => "buffet")

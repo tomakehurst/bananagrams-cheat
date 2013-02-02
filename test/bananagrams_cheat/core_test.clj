@@ -22,3 +22,7 @@
 
 (fact "Letter counts"
   (letter-counts "aluminium") => { \a 1, \i 2, \l 1, \m 2, \n 1 \u 2 })
+
+(fact "Word can be made with"
+  (word-can-be-made-with [\a \e \p \p \p \a \l] "apple") => true
+  (word-can-be-made-with [\a \e \p \b \p \a \l] "banana") => false)

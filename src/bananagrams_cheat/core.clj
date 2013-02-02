@@ -13,9 +13,6 @@
 (defn word-contains [letters word]
   (every? #(.contains word (str %1)) letters))
 
-(defn seq-contains [seq element]
-  (some #(= element %1) seq))
-
 (defn inc-char-count [count-map char]
   (assoc count-map char (inc (get count-map char 0))))
 
@@ -23,8 +20,11 @@
     (into (sorted-map) (reduce inc-char-count {} (seq characters))))
 
 (defn word-can-be-made-with [letters word]
-  (let [in-letters (partial seq-contains letters)]
-    (every? in-letters (seq word))))
+  (let [word-letter-counts (letter-counts word)
+        candidate-letter-counts (letter-counts letters)
+        key #(get %1 0)
+        value #(get %1 1)]
+    (every? #(>= (candidate-letter-counts (key %1)) (value %1)) word-letter-counts)))
 
 (def words
   (line-seq

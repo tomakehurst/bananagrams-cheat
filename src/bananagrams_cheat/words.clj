@@ -1,5 +1,4 @@
-(ns bananagrams-cheat.core
-  (:use bananagrams-cheat.letters)
+(ns bananagrams-cheat.words
   (:import (java.io BufferedReader StringReader)))
 
 (def words
@@ -13,7 +12,7 @@
   (assoc count-map char (inc (get count-map char 0))))
 
 (defn letter-counts [characters]
-    (into (sorted-map) (reduce inc-char-count {} (seq characters))))
+  (into (sorted-map) (reduce inc-char-count {} (seq characters))))
 
 (defn word-can-be-made-with [letters word]
   (let [word-letter-counts (letter-counts word)
@@ -30,14 +29,7 @@
 
 (defn words-makeable-with-letters [letters]
   (let [can-be-made-with-letters (partial word-can-be-made-with letters)]
-      (sort by-descending-length (filter #(can-be-made-with-letters %1) words))))
+    (sort by-descending-length (filter #(can-be-made-with-letters %1) words))))
 
 (defn first-word-makeable-with-letters [letters length]
   (first (filter #(= (count %1) length) (words-makeable-with-letters letters))))
-
-(defn add-one-word-to-board [board available-letters]
-  )
-
-
-
-

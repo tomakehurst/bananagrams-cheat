@@ -19,10 +19,28 @@
 
 (defn letter-at [letter-positions x y]
   (get (first (filter
-                    #(and (= (:x %1) x) (= (:y %1) y))
-                    letter-positions))
+                #(and (= (:x %1) x) (= (:y %1) y))
+                letter-positions))
     :letter
     \space)) ; Return space by default
 
+(defn lowest-value [letter-positions axis]
+  (apply min (map #(axis %1) letter-positions)))
+
+(defn highest-value [letter-positions axis]
+  (apply max (map #(axis %1) letter-positions)))
+
 (defn render [word-definitions]
-  )
+  (let [letter-positions (unique-letter-positions word-definitions)
+        min-x (lowest-value letter-positions :x)
+        max-x (highest-value letter-positions :x)
+        min-y (lowest-value letter-positions :y)
+        max-y (highest-value letter-positions :y)]
+    (apply str (for [y (range min-y (+ max-y 1))]
+      (apply str
+        (conj
+          (map #(letter-at letter-positions %1 y) (range min-x (+ max-x 1)))
+          \newline))))))
+
+(defn print-board [rendered-board]
+  (doseq [row rendered-board] (println row)))

@@ -3,14 +3,14 @@
   (:use bananagrams-cheat.board))
 
 (def example-board
-"
-   s
-recursion
-   p
-   p
-   e
-   r
-")
+  (str
+    "\n"
+    "   s     \n"
+    "recursion\n"
+    "   p     \n"
+    "   p     \n"
+    "   e     \n"
+    "   r     "))
 
 (fact "Letter with coordinates"
   (to-letter-with-coord true 2 7 3 \t) => { :letter \t, :x 5, :y 7}
@@ -46,9 +46,6 @@ recursion
 
 
 
-;(fact "Letter coordinates for multpile words"
-;  (to-letter-positions ))
-
-;(fact "Renders board"
-;  (render { "recursion" { :orientation :horizontal, :x 0, :y 1 }
-;            "supper"    { :orientation :vertical, :x 3, :y 0 } }) => example-board)
+(fact "Renders board"
+  (render [ {:word "recursion", :horizontal? true, :start-x 0, :start-y 1}
+            {:word "supper", :horizontal? false, :start-x 3, :start-y 0 }]) => example-board)

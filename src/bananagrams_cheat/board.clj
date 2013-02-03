@@ -17,6 +17,10 @@
 
 (defn add-to-board [board word intersect-letter-index with-letter-index])
 
+(defn letter-at [letter-positions x y]
+  (:letter (first (filter
+           #(and (= (:x %1) x) (= (:y %1) y))
+           letter-positions))))
 
-(defn render [board]
+(defn render [word-definitions]
   )

@@ -17,10 +17,13 @@ recursion
   (to-letter-with-coord false 4 3 6 \o) => { :letter \o, :x 4, :y 9})
 
 (fact "Getting letters with coordinates from word definition"
-  (word-definition-to-letter-positions { :word "ant", :orientation :horizontal, :start-x 2, :start-y 3}) =>
+  (word-definition-to-letter-positions { :word "ant", :horizontal? true, :start-x 2, :start-y 3}) =>
     [{ :letter \a, :x 2, :y 3}
      { :letter \n, :x 3, :y 3}
      { :letter \t, :x 4, :y 3}])
+
+;(fact "Letter coordinates for multpile words"
+;  (to-letter-positions ))
 
 ;(fact "Renders board"
 ;  (render { "recursion" { :orientation :horizontal, :x 0, :y 1 }

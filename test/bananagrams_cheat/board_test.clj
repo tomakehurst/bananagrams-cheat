@@ -34,6 +34,18 @@ recursion
        { :letter \n, :x 1, :y 3}
        { :letter \y, :x 1, :y 4} })
 
+
+(def example-letter-positions #{{ :letter \a, :x 0, :y 2}
+                                { :letter \n, :x 1, :y 2}
+                                { :letter \t, :x 2, :y 2} })
+
+(fact "Letter at position"
+  (letter-at example-letter-positions 1 2) => \n
+  (letter-at example-letter-positions 0 0) => \space
+  (letter-at example-letter-positions 5 7) => \space)
+
+
+
 ;(fact "Letter coordinates for multpile words"
 ;  (to-letter-positions ))
 

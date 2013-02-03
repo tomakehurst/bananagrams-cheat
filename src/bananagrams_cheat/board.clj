@@ -18,9 +18,11 @@
 (defn add-to-board [board word intersect-letter-index with-letter-index])
 
 (defn letter-at [letter-positions x y]
-  (:letter (first (filter
-           #(and (= (:x %1) x) (= (:y %1) y))
-           letter-positions))))
+  (get (first (filter
+                    #(and (= (:x %1) x) (= (:y %1) y))
+                    letter-positions))
+    :letter
+    \space)) ; Return space by default
 
 (defn render [word-definitions]
   )

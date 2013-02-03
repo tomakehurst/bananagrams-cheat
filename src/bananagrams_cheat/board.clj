@@ -12,8 +12,8 @@
   { :word \"recursion\", :horizontal? true, :start-x 0, :start-y 1 }"
     (map-indexed (partial to-letter-with-coord horizontal? start-x start-y) word))
 
-(defn to-letter-positions [board-definition]
-  )
+(defn unique-letter-positions [word-definitions]
+  (into #{} (map word-definition-to-letter-positions word-definitions)))
 
 (defn add-to-board [board word intersect-letter-index with-letter-index])
 

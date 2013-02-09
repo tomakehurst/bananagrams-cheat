@@ -15,8 +15,6 @@
 (defn unique-letter-positions [word-definitions]
   (set (mapcat word-definition-to-letter-positions word-definitions)))
 
-(defn add-to-board [board word intersect-letter-index with-letter-index])
-
 (defn letter-at [letter-positions x y]
   (get (first (filter
                 #(and (= (:x %1) x) (= (:y %1) y))
@@ -30,8 +28,8 @@
 (defn highest-value [letter-positions axis]
   (apply max (map #(axis %1) letter-positions)))
 
-(defn render [word-definitions]
-  (let [letter-positions (unique-letter-positions word-definitions)
+(defn render [board]
+  (let [letter-positions (unique-letter-positions board)
         min-x (lowest-value letter-positions :x)
         max-x (highest-value letter-positions :x)
         min-y (lowest-value letter-positions :y)
@@ -42,5 +40,11 @@
           (map #(letter-at letter-positions %1 y) (range min-x (+ max-x 1)))
           \newline))))))
 
-(defn print-board [rendered-board]
-  (doseq [row rendered-board] (println row)))
+(defn index-of [word letter]
+  (.indexOf (str letter)))
+
+(defn add-to-board [board word word-to-intersect intersect-letter-index intersectee-letter-index]
+
+  )
+
+

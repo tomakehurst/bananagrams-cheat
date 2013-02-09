@@ -18,4 +18,14 @@
   (word-can-be-made-with [\a \e \p \b \p \a \l] "banana") => false)
 
 (fact "First word of specific length makeable from letters"
-  (bananagrams-cheat.core/first-word-makeable-with-letters [\t \b \i \e \f \f \c \y \u \e] 6) => "buffet")
+  (first-word-makeable-with-letters [\t \b \i \e \f \f \c \y \u \e] 6) => "buffet")
+
+(fact "Deduct from letter counts"
+  (deduct-from-letter-counts { \s 3
+                               \u 1
+                               \m 2
+                               \e 3
+                               \r 6
+                               \d 2
+                               \f 1}
+                               "summer") => {\s 2 \e 2 \r 5 \d 2 \f 1})

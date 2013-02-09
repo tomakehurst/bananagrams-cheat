@@ -33,3 +33,18 @@
 
 (defn first-word-makeable-with-letters [letters length]
   (first (filter #(= (count %1) length) (words-makeable-with-letters letters))))
+
+(defn count-instances-of-letter [word letter]
+  (count (filter #(= letter %1) word)))
+
+(defn subtract-from-letter-count [word letter-count]
+  (let [letter (letter-count 0)
+        starting-quantity (letter-count 1)
+        subtract-quantity (count-instances-of-letter word letter)]
+    [letter (- starting-quantity subtract-quantity)]))
+
+(defn deduct-from-letter-counts [letter-counts word]
+  (into {}
+    (remove
+    #(< (%1 1) 1)
+    (map (partial subtract-from-letter-count word) letter-counts))))

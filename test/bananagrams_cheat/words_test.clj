@@ -29,3 +29,6 @@
                                \d 2
                                \f 1}
                                "summer") => {\s 2 \e 2 \r 5 \d 2 \f 1})
+
+(fact "Remove letters in word"
+  (remove-letters-in-word "thing" [\g \g \i \n \t \d \r \h \b]) => [\g \d \r \b])

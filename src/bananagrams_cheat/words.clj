@@ -48,3 +48,21 @@
     (remove
     #(< (%1 1) 1)
     (map (partial subtract-from-letter-count word) letter-counts))))
+
+(defn first-index-of [letter letters]
+  ((first
+     (filter #(= (%1 1) letter)
+       (map-indexed (fn [index item] [index item]) letters))) 0))
+
+(defn remove-nth [n coll]
+  (keep-indexed #(if (not= n %1) %2) coll))
+
+(defn remove-first-instance-of [letter letters]
+  (remove-nth (first-index-of letter letters) letters))
+
+(defn remove-letters-in-word [word letters]
+  (if (seq word)
+    (let [current-letter (first word)
+          remaining-letters (remove-first-instance-of current-letter letters)]
+      (recur (rest word) remaining-letters))
+    letters))

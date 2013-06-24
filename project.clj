@@ -9,4 +9,6 @@
                      :plugins [[lein-midje "2.0.4"]]
               }
   }
+
+  :jvm-opts ["-Djava.util.Arrays.useLegacyMergeSort=true"]
 )
